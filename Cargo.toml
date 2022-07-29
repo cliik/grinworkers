@@ -9,4 +9,5 @@ author = "cliik"
 [dependencies]
 chrono = "0.4.19"
 clap = {version = "3.2", features = ["yaml"]}
+iter_tools = "0.1.4"
 shellexpand = "2.1.0"

@@ -3,10 +3,12 @@
 #[macro_use]
 extern crate clap;
 extern crate chrono;
+extern crate iter_tools;
 extern crate shellexpand;
 
 use chrono::{Duration, Local, NaiveDateTime};
 use clap::App;
+use iter_tools::Itertools;
 use std::cmp::min;
 use std::collections::HashMap;
 use std::ffi::OsStr;
@@ -108,7 +110,7 @@ fn main() {
 
     // Print summary
     let avg_duration = ts_last_log - ts_start_calc.unwrap_or(ts_first_log);
-    for (worker, shares) in worker_stats {
+    for (worker, &shares) in worker_stats.iter().sorted_by_key(|a| a.0) {
         let hr = 42.0 * shares as f64 / avg_duration.num_seconds() as f64;
         println!(
             "{}: {:.2} G/s ({} shares in {} min)",
