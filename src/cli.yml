@@ -1,0 +1,17 @@
+name: grinworkers
+version: "0.1.0"
+author: cliik
+about: Shows statistcs pulled from grin server logs
+args:
+    - logfile:
+        short: i
+        long: logfile
+        value_name: FILE
+        help: Specify location of grin server log file to parse
+        takes_value: true
+    - time:
+        short: t
+        long: time
+        value_name: TIME
+        help: Time (in minutes) over which to average the stats
+        takes_value: true
