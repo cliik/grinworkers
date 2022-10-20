@@ -1,5 +1,3 @@
-#![feature(iter_intersperse)]
-
 #[macro_use]
 extern crate clap;
 extern crate chrono;
@@ -98,14 +96,16 @@ fn main() {
 
     // Make sure we had enough data to run the requested stats
     let log_duration = ts_last_log - ts_first_log;
-    if let Some(d) = avg_duration && log_duration <= d {
-        println!("Error! Not enough data.");
-        println!(
-            "Only have {} minutes of data. Need {} minutes.",
-            d.num_minutes(),
-            d.num_minutes()
-        );
-        return ();
+    if let Some(d) = avg_duration {
+        if log_duration <= d {
+            println!("Error! Not enough data.");
+            println!(
+                "Only have {} minutes of data. Need {} minutes.",
+                d.num_minutes(),
+                d.num_minutes()
+            );
+            return ();
+        }
     }
 
     // Print summary
